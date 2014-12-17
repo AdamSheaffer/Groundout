@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +10,8 @@
   <title>Ground Out</title>
 </head>
 <body>
-  <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" id="top" role="banner">
+
+  <header class="navbar navbar-inverse navbar-static-top bs-docs-nav" id="top" role="banner">
     <div class="container">
       <div class="navbar-header">
         <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
@@ -29,6 +30,41 @@
       </nav>
     </div>
   </header>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Ground Out</h1>
+      </div>
+    </div>
+    <div class="container about-main">
+      <div class="row">
+        <div class="col-sm-4">
+          <h3>About</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sagittis, nisi eu hendrerit ornare, metus felis dictum dolor, ac vehicula felis lectus vitae dolor. Vestibulum ac viverra eros. Curabitur ac ullamcorper arcu, in sagittis odio. Cras ac mi at risus aliquet ullamcorper eget vitae odio. Maecenas sagittis vel mauris eu dictum.</p>
+        </div>
+        <div class="col-sm-4">
+          <h3>About 2</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sagittis, nisi eu hendrerit ornare, metus felis dictum dolor, ac vehicula felis lectus vitae dolor. Vestibulum ac viverra eros. Curabitur ac ullamcorper arcu, in sagittis odio. Cras ac mi at risus aliquet ullamcorper eget vitae odio. Maecenas sagittis vel mauris eu dictum.</p>
+        </div>
+        <div class="col-sm-4">
+          <h3>Get Started</h3>
+          <div class="login-widget" ng-controller="loginController as login">
+            <form>
+              <label>Email</label>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="John@example.com" ng-model="login.email">
+              </div>
+              <label>Password</label>
+              <span id="forgot-password"><a href="#">Forgot Password</a></span>
+              <div class="form-group">
+                <input type="password" class="form-control" placeholder="password" ng-model="login.password">
+              </div>
+              <button class="btn btn-warning" ng-click="login.login()">Login</button>
+              <button class="btn btn-warning" ng-click="login.register()">Register</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
