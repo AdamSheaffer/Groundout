@@ -7,7 +7,10 @@
     .config(function($routeProvider){
       $routeProvider
       .when('/', {
-        templateUrl: '/#/'
+        templateUrl: 'views/splash.html'
+      })
+      .when('/myprogress', {
+        templateUrl: 'views/myprogress.html'
       })
     })
 
@@ -77,6 +80,15 @@
             console.log("Error sending password reset email:", error);
           }
         });
+      }
+
+      vm.logout = function() {
+        var ref = new Firebase('https://groundout.firebaseio.com/');
+        ref.unauth(function(){
+          $location.path('/');
+          $scope.$apply();
+          console.log('user has logged out');
+        })
       }
 
 
