@@ -1,6 +1,14 @@
 .jumbotron {
-  height: 300px;
+  min-height: 400px;
   text-align: center;
+  background: url('../images/baseball2.jpg') no-repeat center fixed;
+  background-size: cover;
+  margin-bottom: 0;
+  margin-top: 50px;
+}
+
+.jumbo-container {
+  margin-top: 40px;
 }
 
 .login-widget {
@@ -12,8 +20,27 @@
 
 #forgot-password {
   font-size: .8em;
+  cursor: pointer;
 }
 
 .about-main {
+  padding: 0 20px 40px 20px;
+}
+
+.navbar {
+  background-color: #050404
+}
+
+#title {
+  color: #eee;
+  text-shadow: 1px 1px 5px #050404
+}
+
+.tagline, #brand {
+  color: #f0ad4e;
+  text-shadow: 1px 1px 5px #050404
+}
+
+.change-pw-container {
   padding: 0 20px 40px 20px;
 }

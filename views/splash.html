@@ -10,19 +10,19 @@
     </div>
     <div class="col-sm-4">
       <h3>Get Started</h3>
-      <div class="login-widget" ng-controller="loginController as login">
+      <div class="login-widget">
         <form>
           <label>Email</label>
           <div class="form-group">
             <input type="text" class="form-control" placeholder="John@example.com" ng-model="login.email">
           </div>
           <label>Password</label>
-          <span id="forgot-password"><a href="#" ng-click="login.forgotPassword()">Forgot Password</a></span>
+          <span id="forgot-password"><a ng-click="login.forgotPassword()">Forgot Password</a></span>
           <div class="form-group">
             <input type="password" class="form-control" placeholder="password" ng-model="login.password">
           </div>
-          <button class="btn btn-warning" ng-click="login.login()">Login</button>
-          <button class="btn btn-warning" ng-click="login.register()">Register</button>
+          <button class="btn btn-primary" ng-click="login.login()">Login</button>
+          <button class="btn btn-primary" ng-click="login.register()">Register</button>
         </form>
       </div>
     </div>

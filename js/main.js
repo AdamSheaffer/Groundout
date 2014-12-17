@@ -33,7 +33,45 @@
           }
         });
       }
+
+      factory.register = function(userEmail, userPassword, cb){
+        ref.createUser({
+          email: userEmail,
+          password: userPassword
+        }, function(error) {
+          if (error) {
+            switch (error.code) {
+              case "EMAIL_TAKEN":
+                console.log("The new user account cannot be created because the email is already in use.");
+                break;
+              case "INVALID_EMAIL":
+                console.log("The specified email is not a valid email.");
+                break;
+              default:
+                console.log("Error creating user:", error);
+            }
+          } else {
+              console.log("User account created successfully!");
+              $location
+          }
+        });
+      }
+
+      factory.forgotPassword = function(userEmail, cb){
+        ref.resetPassword({
+          email : userEmail
+        }, function(error) {
+          if (error === null) {
+            cb();
+            console.log("Password reset email sent successfully");
+          } else {
+            console.log("Error sending password reset email:", error);
+          }
+        });
+      }
+
       return factory
+
     })
 
     .config(function($routeProvider){
@@ -46,6 +84,12 @@
       .when('/myprogress', {
         templateUrl: 'views/myprogress.html'
       })
+      .when('/changepassword', {
+        templateUrl: 'views/changepassword.html',
+        controller: 'loginController',
+        controllerAs: 'login'
+      })
+      .otherwise({redirectTo: '/'});
     })
 
     .controller('loginController', function($scope, $location, authFactory){
@@ -55,43 +99,19 @@
         authFactory.login(vm.email, vm.password, function(){
           $location.path('/myprogress');
           $scope.$apply();
-        })
+        });
       }
 
       vm.register = function(){
-        var ref = new Firebase('https://groundout.firebaseio.com/');
-        ref.createUser({
-          email: vm.email,
-          password: vm.password
-        }, function(error) {
-          if (error) {
-            switch (error.code) {
-              case "EMAIL_TAKEN":
-                console.log("The new user account cannot be created because the email is already in use.");
-              break;
-              case "INVALID_EMAIL":
-                console.log("The specified email is not a valid email.");
-              break;
-              default:
-                console.log("Error creating user:", error);
-            }
-          } else {
-              console.log("User account created successfully!");
-              vm.login();
-          }
+        authFactory.register(vm.email, vm.password, function(){
+          vm.login();
         });
       }
 
       vm.forgotPassword = function() {
-        var ref = new Firebase('https://groundout.firebaseio.com/');
-        ref.resetPassword({
-          email : vm.email
-        }, function(error) {
-          if (error === null) {
-            console.log("Password reset email sent successfully");
-          } else {
-            console.log("Error sending password reset email:", error);
-          }
+        authFactory.forgotPassword(vm.email, function(){
+          $location.path('/changepassword');
+          $scope.$apply();
         });
       }
 
@@ -100,8 +120,7 @@
         ref.unauth(function(){
           $location.path('/');
           $scope.$apply();
-          console.log('user has logged out');
-        })
+        });
       }
 
 
