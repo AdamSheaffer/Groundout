@@ -4,24 +4,14 @@
   angular.module('myApp', ['ngRoute'])
     .constant('FirebaseURL', 'https://groundout.firebaseio.com/')
 
-    .config(function($routeProvider){
-      $routeProvider
-      .when('/', {
-        templateUrl: 'views/splash.html'
-      })
-      .when('/myprogress', {
-        templateUrl: 'views/myprogress.html'
-      })
-    })
+    .factory('authFactory', function(FirebaseURL, $http, $location){
+      var factory = {},
+        ref = new Firebase(FirebaseURL);
 
-    .controller('loginController', function($scope, $location){
-      var vm = this;
-
-      vm.login = function(){
-        var ref = new Firebase('https://groundout.firebaseio.com/');
+      factory.login = function(userEmail, userPassword, cb){
         ref.authWithPassword({
-          email    : vm.email,
-          password : vm.password
+          email    : userEmail,
+          password : userPassword
         }, function(error, authData) {
           if (error) {
             switch (error.code) {
@@ -39,10 +29,33 @@
             }
           } else {
               console.log("Authenticated successfully with payload:", authData);
-              $location.path('/');
-              $scope.$apply();
+              cb()
           }
         });
+      }
+      return factory
+    })
+
+    .config(function($routeProvider){
+      $routeProvider
+      .when('/', {
+        templateUrl: 'views/splash.html',
+        controller: 'loginController',
+        controllerAs: 'login'
+      })
+      .when('/myprogress', {
+        templateUrl: 'views/myprogress.html'
+      })
+    })
+
+    .controller('loginController', function($scope, $location, authFactory){
+      var vm = this;
+
+      vm.login = function(){
+        authFactory.login(vm.email, vm.password, function(){
+          $location.path('/myprogress');
+          $scope.$apply();
+        })
       }
 
       vm.register = function(){
