@@ -21,6 +21,12 @@
         }
       };
 
+      factory.preventMultiLogin = function(){
+        if(isLoggedIn()) {
+          $location.path('/myprogress');
+        }
+      }
+
       factory.login = function(userEmail, userPassword, cb){
         ref.authWithPassword({
           email    : userEmail,
@@ -124,7 +130,12 @@
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'loginController',
-        controllerAs: 'login'
+        controllerAs: 'login',
+        resolve: {
+          data: function(authFactory) {
+            authFactory.preventMultiLogin();
+          }
+        }
       })
       .when('/logout', {
         template: '',
