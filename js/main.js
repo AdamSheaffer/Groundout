@@ -2,11 +2,24 @@
   'use strict';
 
   angular.module('myApp', ['ngRoute'])
+
+  /////// CONSTANTS //////////
     .constant('FirebaseURL', 'https://groundout.firebaseio.com/')
 
+    /////// FACTORY //////////
     .factory('authFactory', function(FirebaseURL, $http, $location){
       var factory = {},
         ref = new Firebase(FirebaseURL);
+
+      function isLoggedIn(){
+        return !!(ref.getAuth());
+      };
+
+      factory.requireLogin = function(){
+        if (!isLoggedIn()) {
+          $location.path('/login');
+        }
+      };
 
       factory.login = function(userEmail, userPassword, cb){
         ref.authWithPassword({
@@ -90,6 +103,7 @@
 
     })
 
+    /////// CONFIG //////////
     .config(function($routeProvider){
       $routeProvider
       .when('/', {
@@ -98,7 +112,9 @@
         controllerAs: 'login'
       })
       .when('/myprogress', {
-        templateUrl: 'views/myprogress.html'
+        templateUrl: 'views/myprogress.html',
+        controller: 'myProgController',
+        controllerAs: 'myProg'
       })
       .when('/changepassword', {
         templateUrl: 'views/changepassword.html',
@@ -110,7 +126,24 @@
         controller: 'loginController',
         controllerAs: 'login'
       })
+      .when('/logout', {
+        template: '',
+        controller: 'logoutController'
+      })
       .otherwise({redirectTo: '/'});
+    })
+
+    /////// CONTROLLERS //////////
+    .controller('myProgController', function($routeParams, authFactory){
+      authFactory.requireLogin();
+    })
+
+    .controller('logoutController', function($scope, $location){
+      var ref = new Firebase('https://groundout.firebaseio.com/');
+      ref.unauth(function(){
+        $location.path('/');
+        $scope.$apply();
+      })
     })
 
     .controller('loginController', function($scope, $location, authFactory){
@@ -132,14 +165,6 @@
       vm.forgotPassword = function() {
         authFactory.forgotPassword(vm.email, function(){
           $location.path('/changepassword');
-          $scope.$apply();
-        });
-      }
-
-      vm.logout = function() {
-        var ref = new Firebase('https://groundout.firebaseio.com/');
-        ref.unauth(function(){
-          $location.path('/');
           $scope.$apply();
         });
       }
