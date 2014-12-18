@@ -70,6 +70,22 @@
         });
       }
 
+      factory.changePassword = function(userEmail, oldPass, newPass, cb){
+        ref.changePassword({
+          email       : userEmail,
+          oldPassword : oldPass,
+          newPassword : newPass
+        }, function(error) {
+          if (error === null) {
+            console.log('Password changed successfully');
+            cb();
+          } else {
+            console.log('Error changing password:', error);
+          }
+          }
+        );
+      }
+
       return factory
 
     })
@@ -86,6 +102,11 @@
       })
       .when('/changepassword', {
         templateUrl: 'views/changepassword.html',
+        controller: 'loginController',
+        controllerAs: 'login'
+      })
+      .when('/login', {
+        templateUrl: 'views/login.html',
         controller: 'loginController',
         controllerAs: 'login'
       })
@@ -118,6 +139,13 @@
       vm.logout = function() {
         var ref = new Firebase('https://groundout.firebaseio.com/');
         ref.unauth(function(){
+          $location.path('/');
+          $scope.$apply();
+        });
+      }
+
+      vm.changePassword = function() {
+        authFactory.changePassword(vm.email, vm.oldPassword, vm.newPassword, function(){
           $location.path('/');
           $scope.$apply();
         });

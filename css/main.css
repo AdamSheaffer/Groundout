@@ -11,6 +11,14 @@
   margin-top: 40px;
 }
 
+.nav a {
+  color: #f0ad4e;
+}
+
+.widget-wrap {
+  padding: 0;
+}
+
 .login-widget {
   background-color: #eee;
   border-radius: 1em;
@@ -27,7 +35,7 @@
   padding: 0 20px 40px 20px;
 }
 
-.navbar {
+#top-nav {
   background-color: #050404
 }
 
@@ -43,4 +51,24 @@
 
 .change-pw-container {
   padding: 0 20px 40px 20px;
+}
+
+.content {
+  padding-bottom: 400px;
+}
+
+.login-container {
+  margin: 0 25%;
+}
+
+.row{
+  margin: 0 16.6666%;
+}
+
+h2 {
+  color: #758451;
+}
+
+p {
+  line-height: 1.8em;
 }
