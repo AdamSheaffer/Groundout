@@ -119,27 +119,31 @@
       .when('/', {
         templateUrl: 'views/splash.html',
         controller: 'loginController',
-        controllerAs: 'login'
+        controllerAs: 'login',
       })
       .when('/myprogress', {
         templateUrl: 'views/myprogress.html',
         controller: 'myProgController',
-        controllerAs: 'myProg'
+        controllerAs: 'myProg',
+        title: 'My Progress'
       })
-      .when('teams', {
+      .when('/teams', {
         templateUrl: 'views/teams.html',
         controller: 'teamsController',
-        controllerAs: 'teams'
+        controllerAs: 'teams',
+        title: 'Teams'
       })
       .when('/changepassword', {
         templateUrl: 'views/changepassword.html',
         controller: 'loginController',
-        controllerAs: 'login'
+        controllerAs: 'login',
+        title: 'Change Password'
       })
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'loginController',
         controllerAs: 'login',
+        title: 'Login',
         resolve: {
           data: function(authFactory) {
             authFactory.preventMultiLogin();
@@ -152,10 +156,19 @@
       })
       .otherwise({redirectTo: '/'});
     })
+    .run(['$location', '$rootScope', function($location, $rootScope) {
+      $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+        $rootScope.title = current.$$route.title;
+      });
+    }])
 
     /////// CONTROLLERS //////////
     .controller('myProgController', function($routeParams, authFactory){
       authFactory.requireLogin();
+    })
+
+    .controller('teamsController', function(){
+
     })
 
     .controller('logoutController', function($scope, $location, $rootScope){
@@ -167,8 +180,25 @@
       })
     })
 
-    .controller('loginController', function($scope, $location, authFactory){
+    .controller('loginController', function($rootScope, $scope, $location, authFactory){
       var vm = this;
+
+      $rootScope.page = function() {
+        switch($location.$$path){
+          case "/login":
+            return "Login"
+            break;
+          case "/changepassword":
+            return "Change Password"
+            break;
+          case "teams":
+            return "Teams"
+            break;
+          case "myprogress":
+            return "My Progress"
+            break;
+        }
+      }
 
       vm.login = function(){
         authFactory.login(vm.email, vm.password, function(){

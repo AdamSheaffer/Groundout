@@ -44,9 +44,13 @@ body {
   background-color: #050404
 }
 
-#title {
+#title, .page-title {
   color: #eee;
   text-shadow: 1px 1px 5px #050404
+}
+
+.page-title {
+  margin-top: 40px;
 }
 
 .tagline, #brand {
@@ -76,4 +80,24 @@ h2 {
 
 p {
   line-height: 1.8em;
+}
+
+.league-wrap {
+  padding-top: 30px;
+}
+
+.league-logo {
+  height: 250px;
+  margin: 0 auto;
+  display: block;
+}
+
+.division-wrap {
+  margin-left: 45%;
+}
+
+.division-wrap ul {
+  list-style-type: none;
+  font-size: 1.5em;
+  padding: 0;
 }
