@@ -7,9 +7,11 @@
     .constant('FirebaseURL', 'https://groundout.firebaseio.com/')
 
     /////// FACTORY //////////
-    .factory('authFactory', function(FirebaseURL, $http, $location){
+    .factory('authFactory', function(FirebaseURL, $http, $location, $rootScope){
       var factory = {},
         ref = new Firebase(FirebaseURL);
+
+      $rootScope.user = ref.getAuth();
 
       function isLoggedIn(){
         return !!(ref.getAuth());
@@ -48,7 +50,8 @@
             }
           } else {
               console.log("Authenticated successfully with payload:", authData);
-              cb()
+              $rootScope.user = authData;
+              cb();
           }
         });
       }
@@ -149,10 +152,11 @@
       authFactory.requireLogin();
     })
 
-    .controller('logoutController', function($scope, $location){
+    .controller('logoutController', function($scope, $location, $rootScope){
       var ref = new Firebase('https://groundout.firebaseio.com/');
       ref.unauth(function(){
         $location.path('/');
+        $rootScope.user = null;
         $scope.$apply();
       })
     })

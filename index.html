@@ -24,8 +24,8 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/#/">Teams</a></li>
           <li><a href="/#/">Parks</a></li>
-          <li><a href="/#/logout">Logout</a></li>
-          <li><a href="/#/login">Login</a></li>
+          <li ng-show="user"><a href="/#/logout">Logout</a></li>
+          <li ng-hide="user"><a href="/#/login">Login</a></li>
         </ul>
       </nav>
     </div>
