@@ -51,6 +51,7 @@
           } else {
               console.log("Authenticated successfully with payload:", authData);
               $rootScope.user = authData;
+              ref.child('users').child(authData.uid).child('authData').set(authData);
               cb();
           }
         });
@@ -124,6 +125,11 @@
         templateUrl: 'views/myprogress.html',
         controller: 'myProgController',
         controllerAs: 'myProg'
+      })
+      .when('teams', {
+        templateUrl: 'views/teams.html',
+        controller: 'teamsController',
+        controllerAs: 'teams'
       })
       .when('/changepassword', {
         templateUrl: 'views/changepassword.html',
