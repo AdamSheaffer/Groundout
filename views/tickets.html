@@ -1,0 +1,13 @@
+<div class="col-md-9 ticket-results-wrap">
+  <table class="table table-striped">
+    <tr ng-repeat="event in ticket.schedule">
+      <td>{{event.title}}</td>
+      <td>{{event.datetime_local | date: 'short'}}</td>
+      <td><a class="btn btn-warning" href="{{event.url}}" target="_blank">Buy Tickets</a></td>
+    </tr>
+  </table>
+</div>
+<div class="col-md-3 ticket-sidebar">
+  <img class="col-sm-4 img-circle park-pic" src="{{ticket.parkPic}}" alt="Ballpark picture">
+  <h2 class="col-sm-8 park-name">{{ticket.parkName}}</h2>
+</div>
