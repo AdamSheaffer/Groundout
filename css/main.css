@@ -119,7 +119,7 @@ p {
 }
 
 .ticket-results-wrap {
-  border-right: 2px solid gray;
+  border-right: 2px solid #ddd;
 }
 
 .ticket-results-wrap ul{
@@ -128,4 +128,10 @@ p {
 
 .ticket-results-wrap ul li{
   margin-bottom: 20px;
+}
+
+.game-date {
+  border-right: 1px solid #ddd;
+  color: #758451;
+  font-weight: bold;
 }

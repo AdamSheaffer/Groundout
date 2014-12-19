@@ -196,10 +196,7 @@
     })
 
     .controller('teamsController', function($location){
-      $('li').click(function(){
-        // $location.path('/tickets');
 
-      })
     })
 
     .controller('logoutController', function($scope, $location, $rootScope){
