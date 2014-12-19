@@ -84,6 +84,7 @@ p {
 
 .league-wrap {
   padding-top: 30px;
+  padding-bottom: 50px;
 }
 
 .league-logo {
@@ -100,4 +101,31 @@ p {
   list-style-type: none;
   font-size: 1.5em;
   padding: 0;
+}
+
+.division-wrap ul a {
+  display: block;
+}
+
+.park-pic {
+  height:150px;
+  width:180px;
+  display: block;
+}
+
+.ticket-results-wrap, .ticket-sidebar {
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.ticket-results-wrap {
+  border-right: 2px solid gray;
+}
+
+.ticket-results-wrap ul{
+  margin-left: 30px;
+}
+
+.ticket-results-wrap ul li{
+  margin-bottom: 20px;
 }

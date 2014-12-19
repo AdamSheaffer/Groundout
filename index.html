@@ -23,7 +23,7 @@
       <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/#/teams">Teams</a></li>
-          <li><a href="/#/">Parks</a></li>
+          <li ng-show="user"><a href="/#/myprogress">My Progress</a></li>
           <li ng-show="user"><a href="/#/logout">Logout</a></li>
           <li ng-hide="user"><a href="/#/login">Login</a></li>
         </ul>

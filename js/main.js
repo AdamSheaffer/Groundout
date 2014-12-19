@@ -133,6 +133,12 @@
         controllerAs: 'teams',
         title: 'Teams'
       })
+      .when('/tickets/:id', {
+        templateUrl: 'views/tickets.html',
+        controller: 'ticketController',
+        controllerAs: 'ticket',
+        title: 'Tickets'
+      })
       .when('/changepassword', {
         templateUrl: 'views/changepassword.html',
         controller: 'loginController',
@@ -167,8 +173,33 @@
       authFactory.requireLogin();
     })
 
-    .controller('teamsController', function(){
+    .controller('ticketController', function($routeParams, $scope){
+      var vm = this;
+      var venue = $routeParams.id;
+      var url = 'http://api.seatgeek.com/2/events?per_page=83&type=mlb&venue.name=' + venue;
 
+      $.ajax({
+        type: "GET",
+        dataType: "jsonp",
+        url: url,
+        success: function(data) {
+          vm.schedule = data.events;
+          vm.parkName = data.events[0].venue.name;
+          vm.matchup = data.events[0].title;
+          vm.parkPic = data.events[5].performers[1].images.huge;
+          $scope.$apply();
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      })
+    })
+
+    .controller('teamsController', function($location){
+      $('li').click(function(){
+        // $location.path('/tickets');
+
+      })
     })
 
     .controller('logoutController', function($scope, $location, $rootScope){
