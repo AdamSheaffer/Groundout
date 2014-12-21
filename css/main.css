@@ -135,3 +135,22 @@ p {
   color: #758451;
   font-weight: bold;
 }
+
+/******* My Progress *******/
+
+.my-teams {
+  height: 150px;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  transition: filter 500ms ease;
+  -webkit-transition: -webkit-filter 350ms ease;
+}
+
+.my-teams:hover {
+  filter: grayscale(0);
+  -webkit-filter: grayscale(0);
+}
+
+.my-visits-wrap {
+  display: inline-block;
+}

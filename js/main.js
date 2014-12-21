@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('myApp', ['ngRoute'])
+  angular.module('myApp', ['ngRoute', 'ui.bootstrap'])
 
   /////// CONSTANTS //////////
     .constant('FirebaseURL', 'https://groundout.firebaseio.com/')
@@ -169,30 +169,75 @@
     }])
 
     /////// CONTROLLERS //////////
-    .controller('myProgController', function($routeParams, authFactory){
+    .controller('myProgController', function(FirebaseURL, $routeParams, authFactory, $modal, $log, $rootScope){
       authFactory.requireLogin();
+
+      var ref = new Firebase(FirebaseURL);
+      var vm = this;
+
+      vm.user = $rootScope.user.uid
+
+      vm.logToFirebase = function(teamName) {
+        var parkLocation = ref.child('users').child(vm.user).child('visited_parks').child(teamName);
+        parkLocation.set('Visited');
+      }
+
+      vm.teams = [
+        {
+          name: 'Phillies',
+          park: 'Citizens Bank Park',
+          image: '../images/teamlogos/phillies.png'
+        },
+        {
+          name: 'Mets',
+          park: 'Citi Field',
+          image: '../images/teamlogos/mets.png'
+        },
+        {
+          name: 'Braves',
+          park: 'Turner Field',
+          image: '../images/teamlogos/braves.png'
+        },
+        {
+          name: 'Marlins',
+          park: 'Marlins Park',
+          image: '../images/teamlogos/marlins.png'
+        },
+        {
+          name: 'Nationals',
+          park: 'Nationals Park',
+          image: '../images/teamlogos/nationals.png'
+        }
+      ];
+
     })
 
     .controller('ticketController', function($routeParams, $scope){
       var vm = this;
-      var venue = $routeParams.id;
-      var url = 'http://api.seatgeek.com/2/events?per_page=83&type=mlb&venue.name=' + venue;
+      vm.venue = $routeParams.id;
+      vm.page = 1;
+      var url = 'http://api.seatgeek.com/2/events?per_page=10&type=mlb&venue.name=' + vm.venue + '&page=' + vm.page;
 
-      $.ajax({
-        type: "GET",
-        dataType: "jsonp",
-        url: url,
-        success: function(data) {
-          vm.schedule = data.events;
-          vm.parkName = data.events[0].venue.name;
-          vm.matchup = data.events[0].title;
-          vm.parkPic = data.events[5].performers[1].images.huge;
-          $scope.$apply();
-        },
-        error: function(err) {
-          console.log(err);
-        }
-      })
+      vm.findTickets = function(){
+        $.ajax({
+          type: "GET",
+          dataType: "jsonp",
+          url: url,
+          success: function(data) {
+            vm.schedule = data.events;
+            vm.parkName = data.events[0].venue.name;
+            vm.matchup = data.events[0].title;
+            vm.parkPic = data.events[5].performers[1].images.huge;
+            $scope.$apply();
+          },
+          error: function(err) {
+            console.log(err);
+          }
+        });
+      }
+
+      vm.findTickets();
+
     })
 
     .controller('teamsController', function($location){
@@ -260,31 +305,3 @@
 
 
 }());
-
-
-
-
-
-
-
-
-
-// $(document).ready(function(){
-//
-//   $('button').click(function(){
-//     var userInput = $('input').val();
-//     console.log(userInput);
-//     var url = 'http://api.seatgeek.com/2/events?per_page=83&venue.name=' + userInput;
-//     $.ajax({
-//       type: "GET",
-//       dataType: "jsonp",
-//       url: url,
-//       success: function(data) {
-//         console.log(data);
-//       },
-//       error: function(err) {
-//         console.log(err);
-//       }
-//     })
-//   });
-// });
