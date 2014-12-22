@@ -75,7 +75,7 @@
             }
           } else {
               console.log("User account created successfully!");
-              $location
+              cb();
           }
         });
       }
@@ -125,7 +125,19 @@
         templateUrl: 'views/myprogress.html',
         controller: 'myProgController',
         controllerAs: 'myProg',
-        title: 'My Progress'
+        title: 'My Progress',
+        // resolve: {
+        //   data: function($http, $rootScope, FirebaseURL) {
+        //     var id = $rootScope.user.uid;
+        //     $http.get(FirebaseURL + '/users/' + id + 'visited_parks.json')
+        //     .success(function(data){
+        //       $rootScope.visitedParks = data;
+        //     })
+        //     .error(function(err){
+        //       console.log(err);
+        //     })
+        //   }
+        // }
       })
       .when('/teams', {
         templateUrl: 'views/teams.html',
@@ -169,46 +181,69 @@
     }])
 
     /////// CONTROLLERS //////////
-    .controller('myProgController', function(FirebaseURL, $routeParams, authFactory, $modal, $log, $rootScope){
+      .controller('myProgController', function($http, FirebaseURL, $routeParams, authFactory, $rootScope){
       authFactory.requireLogin();
 
       var ref = new Firebase(FirebaseURL);
       var vm = this;
-
-      vm.user = $rootScope.user.uid
-
-      vm.logToFirebase = function(teamName) {
-        var parkLocation = ref.child('users').child(vm.user).child('visited_parks').child(teamName);
-        parkLocation.set('Visited');
-      }
+      vm.user = $rootScope.user.uid;
 
       vm.teams = [
-        {
-          name: 'Phillies',
-          park: 'Citizens Bank Park',
-          image: '../images/teamlogos/phillies.png'
-        },
-        {
-          name: 'Mets',
-          park: 'Citi Field',
-          image: '../images/teamlogos/mets.png'
-        },
-        {
-          name: 'Braves',
-          park: 'Turner Field',
-          image: '../images/teamlogos/braves.png'
-        },
-        {
-          name: 'Marlins',
-          park: 'Marlins Park',
-          image: '../images/teamlogos/marlins.png'
-        },
-        {
-          name: 'Nationals',
-          park: 'Nationals Park',
-          image: '../images/teamlogos/nationals.png'
-        }
+      {
+        name: 'Phillies',
+        park: 'Citizens Bank Park',
+        image: '../images/teamlogos/phillies.png',
+        visited: false
+      },
+      {
+        name: 'Mets',
+        park: 'Citi Field',
+        image: '../images/teamlogos/mets.png',
+        visited: false
+      },
+      {
+        name: 'Braves',
+        park: 'Turner Field',
+        image: '../images/teamlogos/braves.png',
+        visited: false
+      },
+      {
+        name: 'Marlins',
+        park: 'Marlins Park',
+        image: '../images/teamlogos/marlins.png',
+        visited: false
+      },
+      {
+        name: 'Nationals',
+        park: 'Nationals Park',
+        image: '../images/teamlogos/nationals.png',
+        visited: false
+      }
       ];
+
+      $http.get(FirebaseURL + 'users/' + vm.user + '/visited_parks.json')
+        .success(function(data){
+          debugger
+          for(var i=0; i<vm.teams.length; i++) {
+            var team = vm.teams[i];
+            if(!!data[team.name]) {
+              team.visited = true;
+            }
+          }
+        })
+        .error(function(err){
+          console.log(err);
+        });
+
+      vm.markAsVisited = function(teamName) {
+        var parkLocation = ref.child('users').child(vm.user).child('visited_parks').child(teamName);
+        parkLocation.set(true);
+        for(var i=0; i<vm.teams.length; i++) {
+          if(vm.teams[i].name === teamName) {
+            vm.teams[i].visited = true;
+          }
+        }
+      }
 
     })
 

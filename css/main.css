@@ -138,19 +138,29 @@ p {
 
 /******* My Progress *******/
 
-.my-teams {
+.teams {
+  display: block;
   height: 150px;
+}
+
+.unvisited {
   filter: grayscale(100%);
   -webkit-filter: grayscale(100%);
   transition: filter 500ms ease;
   -webkit-transition: -webkit-filter 350ms ease;
 }
 
-.my-teams:hover {
+.unvisited:hover {
   filter: grayscale(0);
   -webkit-filter: grayscale(0);
 }
 
 .my-visits-wrap {
   display: inline-block;
+  margin: 25px;
+}
+
+.my-visits-wrap .btn {
+  display: block;
+  margin: 0 auto;
 }

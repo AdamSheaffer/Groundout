@@ -1,22 +1,8 @@
-<div class="col-md-12 progress-wrapper">
+<div class="progress-wrapper">
 
   <div class="my-visits-wrap" ng-repeat="team in myProg.teams">
-    <img class="my-teams" src="{{team.image}}" alt="{{team.name}}">
-    <button class="btn btn-warning" ng-click="myProg.logToFirebase(team.name)">Mark As Visited</button>
+    <img class="teams" ng-class="{'unvisited': !team.visited}" ng-src="{{team.image}}" alt="{{team.name}}">
+    <button ng-hide="team.visited" class="btn btn-warning" ng-click="myProg.markAsVisited(team.name)">Mark As Visited</button>
   </div>
-
-  <div modal="showModal" close="cancel()">
-    <div class="modal-header">
-      <h4>Modal Dialog</h4>
-    </div>
-    <div class="modal-body">
-      <p>Example paragraph with some text.</p>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-success" ng-click="ok()">Okay</button>
-      <button class="btn" ng-click="cancel()">Cancel</button>
-    </div>
-  </div>
-
 
 </div>
