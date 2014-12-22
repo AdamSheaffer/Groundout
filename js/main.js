@@ -235,6 +235,17 @@
           console.log(err);
         });
 
+      vm.percentComplete = function() {
+        var totalVisited = 0;
+        var totalTeams = vm.teams.length
+        for(var i=0; i<totalTeams; i++) {
+          if(vm.teams[i].visited === true) {
+            totalVisited ++;
+          }
+        }
+        return totalVisited / totalTeams;
+      };
+
       vm.markAsVisited = function(teamName) {
         var parkLocation = ref.child('users').child(vm.user).child('visited_parks').child(teamName);
         parkLocation.set(true);
