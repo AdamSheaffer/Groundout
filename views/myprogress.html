@@ -1,10 +1,44 @@
-<h1>{{myProg.percentComplete()}}</h1>
+<div class="progress col-10-sm">
+  <div class="progress-bar" role="progressbar" aria-valuenow="{{myProg.percentComplete()}}" aria-valuemin="10" aria-valuemax="100" style="width: {{myProg.percentComplete()}};">
+    {{myProg.percentComplete()}}
+  </div>
+</div>
 
 <div class="progress-wrapper">
+  <div class="prog-lightbox" ng-show="myProg.showModal"></div>
+
+  <div class="prog-modal" ng-show="myProg.showModal">
+    <h2>How was your trip to {{myProg.showModal}}?</h2>
+    <form role="form" name="newVisitForm">
+      <div class="form-group">
+        <label>Date</label>
+        <input class="form-control" type="text" ng-model="myProg.visit.date" bs-datepicker data-date-type="string" required>
+      </div>
+      <div class="form-group">
+        <label>Rating</label>
+        <select ng-model="myProg.visit.rating">
+          <option value="&#9733;">&#9733;</option>
+          <option value="&#9733; &#9733;">&#9733; &#9733;</option>
+          <option value="&#9733; &#9733; &#9733;">&#9733; &#9733; &#9733;</option>
+          <option value="&#9733; &#9733; &#9733; &#9733;">&#9733; &#9733; &#9733; &#9733;</option>
+          <option value="&#9733; &#9733; &#9733; &#9733; &#9733;">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Comments</label>
+        <textarea cols="40" rows="5" ng-model="myProg.visit.comments" placeholder="Awesome hotdogs!"></textarea>
+      </div>
+      <button class="btn btn-warning" ng-click="myProg.hideModal()">Cancel</button>
+      <button class="btn btn-warning" ng-click="myProg.markAsVisited(myProg.showModal)">Log Trip</button>
+    </form>
+  </div>
 
   <div class="my-visits-wrap" ng-repeat="team in myProg.teams">
     <img class="teams" ng-class="{'unvisited': !team.visited}" ng-src="{{team.image}}" alt="{{team.name}}">
-    <button ng-hide="team.visited" class="btn btn-warning" ng-click="myProg.markAsVisited(team.name)">Mark As Visited</button>
+    <div>{{team.date}}</div>
+    <div>{{team.rating}}</div>
+    <div>{{team.comments}}</div>
+    <button ng-hide="team.visited" class="btn btn-warning" ng-click="myProg.askForDetails(team.park)">Mark As Visited</button>
   </div>
 
 </div>

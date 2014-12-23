@@ -164,3 +164,33 @@ p {
   display: block;
   margin: 0 auto;
 }
+
+.progress {
+  margin: 35px auto;
+  width: 400px;
+}
+
+.prog-lightbox {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: #000;
+  opacity: .7;
+  top: 0;
+  left: 0;
+}
+
+.prog-modal {
+  top: 15%;
+  left: 35%;
+  position: fixed;
+  width: 30%;
+  min-width: 300px;
+  box-shadow: #343434 5px 5px 15px;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  background-color: #f8f8f8;
+  border: solid 5px #CECECE;
+  z-index: 20;
+}

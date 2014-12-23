@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('myApp', ['ngRoute', 'ui.bootstrap'])
+  angular.module('myApp', ['ngRoute', 'ngAnimate', 'mgcrea.ngStrap'])
 
   /////// CONSTANTS //////////
     .constant('FirebaseURL', 'https://groundout.firebaseio.com/')
@@ -126,18 +126,6 @@
         controller: 'myProgController',
         controllerAs: 'myProg',
         title: 'My Progress',
-        // resolve: {
-        //   data: function($http, $rootScope, FirebaseURL) {
-        //     var id = $rootScope.user.uid;
-        //     $http.get(FirebaseURL + '/users/' + id + 'visited_parks.json')
-        //     .success(function(data){
-        //       $rootScope.visitedParks = data;
-        //     })
-        //     .error(function(err){
-        //       console.log(err);
-        //     })
-        //   }
-        // }
       })
       .when('/teams', {
         templateUrl: 'views/teams.html',
@@ -226,8 +214,11 @@
           debugger
           for(var i=0; i<vm.teams.length; i++) {
             var team = vm.teams[i];
-            if(!!data[team.name]) {
+            if(!!data[team.park]) {
               team.visited = true;
+              team.date = data[team.park].date;
+              team.rating = data[team.park].rating;
+              team.comments = data[team.park].comments;
             }
           }
         })
@@ -243,15 +234,33 @@
             totalVisited ++;
           }
         }
-        return totalVisited / totalTeams;
+        return (totalVisited / totalTeams * 100) + '%';
       };
 
-      vm.markAsVisited = function(teamName) {
-        var parkLocation = ref.child('users').child(vm.user).child('visited_parks').child(teamName);
-        parkLocation.set(true);
+      vm.showModal = false;
+
+      vm.askForDetails = function(parkName) {
         for(var i=0; i<vm.teams.length; i++) {
-          if(vm.teams[i].name === teamName) {
+          if(vm.teams[i].park === parkName) {
+            vm.showModal = vm.teams[i].park;
+          }
+        }
+      }
+
+      vm.hideModal = function() {
+        vm.showModal = false;
+      }
+
+      vm.markAsVisited = function(parkName) {
+        debugger
+        var parkLocation = ref.child('users').child(vm.user).child('visited_parks').child(parkName);
+        parkLocation.set(vm.visit);
+        for(var i=0; i<vm.teams.length; i++) {
+          if(vm.teams[i].park === parkName) {
             vm.teams[i].visited = true;
+            vm.teams[i].date = vm.visit.date;
+            vm.teams[i].rating = vm.visit.rating;
+            vm.teams[i].comments = vm.visit.comments;
           }
         }
       }
@@ -262,7 +271,7 @@
       var vm = this;
       vm.venue = $routeParams.id;
       vm.page = 1;
-      var url = 'http://api.seatgeek.com/2/events?per_page=10&type=mlb&venue.name=' + vm.venue + '&page=' + vm.page;
+      var url = 'http://api.seatgeek.com/2/events?per_page=83&type=mlb&venue.name=' + vm.venue + '&page=' + vm.page;
 
       vm.findTickets = function(){
         $.ajax({
