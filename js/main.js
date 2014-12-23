@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('myApp', ['ngRoute', 'ngAnimate', 'mgcrea.ngStrap'])
+  angular.module('myApp', ['ngRoute', 'ngAnimate', 'mgcrea.ngStrap', 'angularUtils.directives.dirPagination'])
 
   /////// CONSTANTS //////////
     .constant('FirebaseURL', 'https://groundout.firebaseio.com/')

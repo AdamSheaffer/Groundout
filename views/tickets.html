@@ -1,7 +1,9 @@
 <div class="col-md-9 ticket-results-wrap">
   <table class="table table-striped">
-    <tr ng-repeat="event in ticket.schedule">
-      <td class="game-date">{{event.datetime_local | date: 'MMM d'}}</td>
+    <tr dir-paginate="event in ticket.schedule | itemsPerPage: 10">
+      <td class="game-date">
+        {{event.datetime_local | date: 'MMM d'}}
+      </td>
       <td>
         <h4>{{event.title}}</h4>
         <div>Tickets from {{event.stats.lowest_price | currency: '$'}}</div>
@@ -9,6 +11,7 @@
       <td><a class="btn btn-warning" href="{{event.url}}" target="_blank">Buy Tickets</a></td>
     </tr>
   </table>
+  <dir-pagination-controls template-url="../bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
 </div>
 <div class="col-md-3 ticket-sidebar">
   <img class="col-sm-4 img-circle park-pic" ng-src="{{ticket.parkPic}}" alt="Ballpark picture">
