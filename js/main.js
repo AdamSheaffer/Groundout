@@ -287,12 +287,19 @@
     /////// CONTROLLERS //////////
       .controller('myProgController', function($http, FirebaseURL, $routeParams, authFactory, $rootScope, teamsFactory){
       authFactory.requireLogin();
-
+      debugger
       var ref = new Firebase(FirebaseURL);
       var vm = this;
       vm.user = $rootScope.user.uid;
 
       vm.teams = teamsFactory.teams;
+
+      for(var i=0; i<vm.teams.length; i++) {
+        vm.teams[i].visited = false;
+        delete vm.teams[i].date;
+        delete vm.teams[i].rating;
+        delete vm.teams[i].comments;
+      }
 
       $http.get(FirebaseURL + 'users/' + vm.user + '/visited_parks.json')
         .success(function(data){
@@ -348,6 +355,7 @@
             vm.teams[i].comments = vm.visit.comments;
           }
         }
+        vm.visit = {};
       }
 
     })
