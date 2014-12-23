@@ -46,7 +46,77 @@
         image: '../images/teamlogos/nationals.png',
         parkphoto: '../images/parkphotos/Nationals Park.jpg',
         visited: false
-      }
+      },
+      {
+        name: 'Cardinals',
+        park: 'Busch Stadium',
+        image: '../images/teamlogos/cardinals.png',
+        parkphoto: '../images/parkphotos/Busch Stadium.jpg',
+        visited: false
+      },
+      {
+        name: 'Pirates',
+        park: 'PNC Park',
+        image: '../images/teamlogos/pirates.png',
+        parkphoto: '../images/parkphotos/PNC Park.jpg',
+        visited: false
+      },
+      {
+        name: 'Brewers',
+        park: 'Miller Park',
+        image: '../images/teamlogos/brewers.png',
+        parkphoto: '../images/parkphotos/Miller Park.jpg',
+        visited: false
+      },
+      {
+        name: 'Reds',
+        park: 'Great American Ball Park',
+        image: '../images/teamlogos/reds.png',
+        parkphoto: '../images/parkphotos/Great American Ballpark.jpg',
+        visited: false
+      },
+      {
+        name: 'Chicago Cubs',
+        park: 'Wrigley Field',
+        image: '../images/teamlogos/cubs.png',
+        parkphoto: '../images/parkphotos/Wrigley Field.jpg',
+        visited: false
+      },
+      {
+        name: 'Dodgers',
+        park: 'Dodger Stadium',
+        image: '../images/teamlogos/dodgers.png',
+        parkphoto: '../images/parkphotos/Dodger Stadium.jpg',
+        visited: false
+      },
+      {
+        name: 'Giants',
+        park: 'AT&T Park',
+        image: '../images/teamlogos/giants.gif',
+        parkphoto: '../images/parkphotos/AT&T Park.jpg',
+        visited: false
+      },
+      {
+        name: 'Padres',
+        park: 'Petco Park',
+        image: '../images/teamlogos/padres.png',
+        parkphoto: '../images/parkphotos/Petco Park.jpg',
+        visited: false
+      },
+      {
+        name: 'Rockies',
+        park: 'Coors Field',
+        image: '../images/teamlogos/rockies.png',
+        parkphoto: '../images/parkphotos/Coors Field.jpg',
+        visited: false
+      },
+      {
+        name: 'Diamondbacks',
+        park: 'Chase Field',
+        image: '../images/teamlogos/diamondbacks.png',
+        parkphoto: '../images/parkphotos/Chase Field.jpg',
+        visited: false
+      },
       ];
 
       return factory
@@ -249,7 +319,7 @@
             totalVisited ++;
           }
         }
-        return (totalVisited / totalTeams * 100) + '%';
+        return Math.round(totalVisited / totalTeams * 100) + '%';
       };
 
       vm.showModal = false;
@@ -373,7 +443,6 @@
           $scope.$apply();
         });
       }
-
 
     })
 
