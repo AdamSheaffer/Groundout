@@ -7,6 +7,52 @@
     .constant('FirebaseURL', 'https://groundout.firebaseio.com/')
 
     /////// FACTORY //////////
+    .factory('teamsFactory', function(FirebaseURL){
+      var factory = {},
+        ref = new Firebase(FirebaseURL);
+
+      factory.teams = [
+      {
+        name: 'Phillies',
+        park: 'Citizens Bank Park',
+        image: '../images/teamlogos/phillies.png',
+        parkphoto: '../images/parkphotos/Citizens Bank Park.jpg',
+        visited: false
+      },
+      {
+        name: 'Mets',
+        park: 'Citi Field',
+        image: '../images/teamlogos/mets.png',
+        parkphoto: '../images/parkphotos/Citi Field.jpg',
+        visited: false
+      },
+      {
+        name: 'Braves',
+        park: 'Turner Field',
+        image: '../images/teamlogos/braves.png',
+        parkphoto: '../images/parkphotos/Turner Field.jpg',
+        visited: false
+      },
+      {
+        name: 'Marlins',
+        park: 'Marlins Park',
+        image: '../images/teamlogos/marlins.png',
+        parkphoto: '../images/parkphotos/Marlins Park.jpg',
+        visited: false
+      },
+      {
+        name: 'Nationals',
+        park: 'Nationals Park',
+        image: '../images/teamlogos/nationals.png',
+        parkphoto: '../images/parkphotos/Nationals Park.jpg',
+        visited: false
+      }
+      ];
+
+      return factory
+
+    })
+
     .factory('authFactory', function(FirebaseURL, $http, $location, $rootScope){
       var factory = {},
         ref = new Firebase(FirebaseURL);
@@ -169,45 +215,14 @@
     }])
 
     /////// CONTROLLERS //////////
-      .controller('myProgController', function($http, FirebaseURL, $routeParams, authFactory, $rootScope){
+      .controller('myProgController', function($http, FirebaseURL, $routeParams, authFactory, $rootScope, teamsFactory){
       authFactory.requireLogin();
 
       var ref = new Firebase(FirebaseURL);
       var vm = this;
       vm.user = $rootScope.user.uid;
 
-      vm.teams = [
-      {
-        name: 'Phillies',
-        park: 'Citizens Bank Park',
-        image: '../images/teamlogos/phillies.png',
-        visited: false
-      },
-      {
-        name: 'Mets',
-        park: 'Citi Field',
-        image: '../images/teamlogos/mets.png',
-        visited: false
-      },
-      {
-        name: 'Braves',
-        park: 'Turner Field',
-        image: '../images/teamlogos/braves.png',
-        visited: false
-      },
-      {
-        name: 'Marlins',
-        park: 'Marlins Park',
-        image: '../images/teamlogos/marlins.png',
-        visited: false
-      },
-      {
-        name: 'Nationals',
-        park: 'Nationals Park',
-        image: '../images/teamlogos/nationals.png',
-        visited: false
-      }
-      ];
+      vm.teams = teamsFactory.teams;
 
       $http.get(FirebaseURL + 'users/' + vm.user + '/visited_parks.json')
         .success(function(data){
@@ -267,11 +282,11 @@
 
     })
 
-    .controller('ticketController', function($routeParams, $scope){
+    .controller('ticketController', function($routeParams, $scope, teamsFactory){
       var vm = this;
       vm.venue = $routeParams.id;
-      vm.page = 1;
-      var url = 'http://api.seatgeek.com/2/events?per_page=83&type=mlb&venue.name=' + vm.venue + '&page=' + vm.page;
+      vm.teams = teamsFactory.teams;
+      var url = 'http://api.seatgeek.com/2/events?per_page=83&type=mlb&venue.name=' + vm.venue
 
       vm.findTickets = function(){
         $.ajax({
@@ -282,7 +297,11 @@
             vm.schedule = data.events;
             vm.parkName = data.events[0].venue.name;
             vm.matchup = data.events[0].title;
-            vm.parkPic = data.events[5].performers[1].images.huge;
+            for(var i=0; i<vm.teams.length; i++) {
+              if(vm.teams[i].park === vm.parkName) {
+                vm.parkPic = vm.teams[i].parkphoto;
+              }
+            }
             $scope.$apply();
           },
           error: function(err) {
