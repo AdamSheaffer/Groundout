@@ -142,6 +142,7 @@ p {
   display: block;
   height: 150px;
   width: 150px;
+  margin: auto;
 }
 
 .unvisited {
@@ -168,7 +169,7 @@ p {
 
 .progress {
   margin: 35px auto;
-  width: 400px;
+  width: 40%;
 }
 
 .prog-lightbox {
@@ -199,4 +200,23 @@ p {
 .stars {
   color: rgb(224, 204, 96);
   font-size: 1.25em;
+}
+
+.my-visits-wrap {
+  height: 300px;
+  width: 200px;
+}
+
+.trip-details{
+  margin-top: 5px;
+  height: 150px;
+  overflow: scroll;
+}
+
+h5 {
+  margin: 5px 0;
+}
+
+.my-visits-wrap .btn {
+  margin-top: 30px;
 }
