@@ -195,3 +195,8 @@ p {
   border: solid 5px #CECECE;
   z-index: 20;
 }
+
+.stars {
+  color: rgb(224, 204, 96);
+  font-size: 1.25em;
+}

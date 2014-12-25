@@ -34,9 +34,11 @@
   </div>
 
   <div class="my-visits-wrap" ng-repeat="team in myProg.teams">
-    <img class="teams" ng-class="{'unvisited': !team.visited}" ng-src="{{team.image}}" alt="{{team.name}}">
+    <a href="{{team.ticketpath}}">
+      <img class="teams" ng-class="{'unvisited': !team.visited}" ng-src="{{team.image}}" alt="{{team.name}}">
+    </a>
     <div>{{team.date}}</div>
-    <div>{{team.rating}}</div>
+    <div class="stars">{{team.rating}}</div>
     <div>{{team.comments}}</div>
     <button ng-hide="team.visited" class="btn btn-warning" ng-click="myProg.askForDetails(team.park)">Mark As Visited</button>
   </div>
