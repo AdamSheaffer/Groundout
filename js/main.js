@@ -470,12 +470,14 @@
         for(var i=0; i<vm.teams.length; i++) {
           if(vm.teams[i].park === parkName) {
             vm.showModal = vm.teams[i].park;
+            vm.parkPic = vm.teams[i].parkphoto;
           }
         }
       }
 
       vm.hideModal = function() {
         vm.showModal = false;
+        vm.visit = {};
       }
 
       vm.markAsVisited = function(parkName) {
@@ -491,7 +493,6 @@
           }
         }
         vm.hideModal();
-        vm.visit = {};
       }
 
     })

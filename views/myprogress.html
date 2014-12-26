@@ -1,3 +1,7 @@
+<div class="prog-welcome">
+  <h3>You've seen {{myProg.percentComplete()}} of all parks</h3>
+  <h5>Log a visit or check out available tickets by clicking a team below!<h5>
+</div>
 <div class="progress col-10-sm">
   <div class="progress-bar" role="progressbar" aria-valuenow="{{myProg.percentComplete()}}" aria-valuemin="10" aria-valuemax="100" style="width: {{myProg.percentComplete()}};">
     {{myProg.percentComplete()}}
@@ -5,9 +9,10 @@
 </div>
 
 <div class="progress-wrapper">
-  <div class="prog-lightbox" ng-show="myProg.showModal"></div>
+  <div class="prog-lightbox" ng-show="myProg.showModal" ng-click="myProg.hideModal()"></div>
 
   <div class="prog-modal" ng-show="myProg.showModal">
+    <img class="modal-pic" ng-src="{{myProg.parkPic}}">
     <h2>How was your trip to {{myProg.showModal}}?</h2>
     <form role="form" name="newVisitForm">
       <div class="form-group">
