@@ -41,7 +41,8 @@ body {
 }
 
 .navbar-inverse {
-  background-color: #050404
+  background-color: #050404;
+  z-index: 10;
 }
 
 #title, .page-title {
@@ -189,7 +190,7 @@ p {
 }
 
 .prog-modal {
-  top: 15%;
+  top: 5%;
   left: 35%;
   position: fixed;
   width: 30%;
