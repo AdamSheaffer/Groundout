@@ -423,7 +423,6 @@
     /////// CONTROLLERS //////////
       .controller('myProgController', function($http, FirebaseURL, $routeParams, authFactory, $rootScope, teamsFactory){
       authFactory.requireLogin();
-      debugger
       var ref = new Firebase(FirebaseURL);
       var vm = this;
       vm.user = $rootScope.user.uid;
@@ -439,7 +438,6 @@
 
       $http.get(FirebaseURL + 'users/' + vm.user + '/visited_parks.json')
         .success(function(data){
-          debugger
           for(var i=0; i<vm.teams.length; i++) {
             var team = vm.teams[i];
             if(!!data[team.park]) {
@@ -498,11 +496,14 @@
 
     })
 
-    .controller('ticketController', function($routeParams, $scope, teamsFactory, authFactory){
+    .controller('ticketController', function(FirebaseURL, $routeParams, $scope, teamsFactory, authFactory){
       var vm = this;
+      var ref = new Firebase(FirebaseURL);
       vm.venue = $routeParams.id;
       vm.teams = teamsFactory.teams;
-      var url = 'http://api.seatgeek.com/2/events?per_page=83&type=mlb&venue.name=' + vm.venue
+      vm.titleCaseParkName = vm.venue.replace(/\b./g, function(m){ return m.toUpperCase(); }); //this is to get park name as title case
+      var url = 'http://api.seatgeek.com/2/events?per_page=83&type=mlb&venue.name=' + vm.venue;
+
 
       vm.findTickets = function(){
         $.ajax({
@@ -525,6 +526,27 @@
           }
         });
       }
+
+      vm.averageUserRating = function() {
+        var numOfUsers = 0;
+        var sumOfRatings = 0;
+
+        ref.child("users").on("value", function(snapshot) {
+          snapshot.forEach(function(childSnapshot){
+            var hasRating = !!(childSnapshot.val().visited_parks[vm.titleCaseParkName]);
+            if(hasRating) {
+              var rating = childSnapshot.val().visited_parks[vm.titleCaseParkName].rating;
+              numOfUsers ++;
+              var stars = rating.replace(/\s/g, '').length; //getting rid of spaces
+              sumOfRatings += stars;
+            }
+          })
+          return sumOfRatings / numOfUsers;
+        });
+
+      }
+
+      vm.averageUserRating();
 
       vm.findTickets();
 

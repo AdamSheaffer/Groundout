@@ -15,6 +15,10 @@ body {
   margin-top: 40px;
 }
 
+.navbar-collapse {
+  clear: right;
+}
+
 .navbar-inverse .navbar-nav>li>a {
   color: #f0ad4e;
 }
@@ -139,6 +143,10 @@ p {
 
 .ticket-results-wrap ul li{
   margin-bottom: 20px;
+}
+
+.table>tbody>tr>td {
+  vertical-align: middle;
 }
 
 .game-date {
