@@ -112,6 +112,16 @@ p {
   height:150px;
   width:180px;
   display: block;
+  margin-left: auto;
+  margin-right: auto;
+  float: none;
+}
+
+.ticket-sidebar h2 {
+  text-align: center;
+  clear: left;
+  margin: 10px auto 0 auto;
+  float: none;
 }
 
 .ticket-results-wrap, .ticket-sidebar {

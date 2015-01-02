@@ -1,4 +1,8 @@
-<div class="col-md-9 ticket-results-wrap">
+<div class="col-md-3 col-md-push-9 ticket-sidebar">
+  <img class="col-sm-4 img-circle park-pic" ng-src="{{ticket.parkPic}}" alt="Ballpark picture">
+  <h2 class="col-sm-8 park-name">{{ticket.parkName}}</h2>
+</div>
+<div class="col-md-9 col-md-pull-3 ticket-results-wrap">
   <table class="table table-striped">
     <tr dir-paginate="event in ticket.schedule | itemsPerPage: 10">
       <td class="game-date">
@@ -12,8 +16,4 @@
     </tr>
   </table>
   <dir-pagination-controls template-url="../bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
-</div>
-<div class="col-md-3 ticket-sidebar">
-  <img class="col-sm-4 img-circle park-pic" ng-src="{{ticket.parkPic}}" alt="Ballpark picture">
-  <h2 class="col-sm-8 park-name">{{ticket.parkName}}</h2>
 </div>
