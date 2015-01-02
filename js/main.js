@@ -260,7 +260,8 @@
 
     .factory('authFactory', function(FirebaseURL, $http, $location, $rootScope){
       var factory = {},
-        ref = new Firebase(FirebaseURL);
+
+      ref = new Firebase(FirebaseURL);
 
       $rootScope.user = ref.getAuth();
 
@@ -497,7 +498,7 @@
 
     })
 
-    .controller('ticketController', function($routeParams, $scope, teamsFactory){
+    .controller('ticketController', function($routeParams, $scope, teamsFactory, authFactory){
       var vm = this;
       vm.venue = $routeParams.id;
       vm.teams = teamsFactory.teams;
@@ -529,7 +530,7 @@
 
     })
 
-    .controller('teamsController', function($location){
+    .controller('teamsController', function(authFactory){
 
     })
 
