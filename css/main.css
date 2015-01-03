@@ -128,6 +128,15 @@ p {
   float: none;
 }
 
+.ticket-sidebar h4 {
+  text-align: center
+}
+
+.ticket-sidebar span {
+  display: block;
+  text-align: center;
+}
+
 .ticket-results-wrap, .ticket-sidebar {
   margin-top: 80px;
   margin-bottom: 80px;

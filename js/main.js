@@ -515,6 +515,7 @@
       vm.teams = teamsFactory.teams;
       vm.titleCaseParkName = vm.venue.replace(/\b./g, function(m){ return m.toUpperCase(); }); //this is to get park name as title case
       vm.avgRating;
+      vm.commentsList = [];
       var url = 'http://api.seatgeek.com/2/events?per_page=83&type=mlb&venue.name=' + vm.venue;
 
 
@@ -554,12 +555,28 @@
               sumOfRatings += stars;
             }
           })
-          vm.avgRating = sumOfRatings / numOfUsers;
+          var average = sumOfRatings / numOfUsers
+          vm.avgRating = Math.round(average * 100) / 100;
           $scope.$apply();
         });
       }
 
+      vm.listComments = function() {
+
+        ref.child("users").on("value", function(snapshot) {
+          snapshot.forEach(function(childSnapshot){
+            var hasComment = !!(childSnapshot.val().visited_parks[vm.titleCaseParkName]);
+            if(hasComment) {
+              var trip = childSnapshot.val().visited_parks[vm.titleCaseParkName];
+              vm.commentsList.push(trip);
+            }
+          })
+        })
+      }
+
       vm.findAverageRating();
+
+      vm.listComments();
 
       vm.findTickets();
 
