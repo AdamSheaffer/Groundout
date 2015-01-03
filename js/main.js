@@ -439,7 +439,6 @@
       $http.get(FirebaseURL + 'users/' + vm.user + '/visited_parks.json')
         .success(function(data){
           for(var i=0; i<vm.teams.length; i++) {
-            debugger
             var team = vm.teams[i];
             if(!!data[team.park]) {
               team.visited = true;
@@ -475,13 +474,25 @@
         }
       }
 
+      vm.editTrip = function(parkName){
+        for(var i=0; i<vm.teams.length; i++) {
+          if(vm.teams[i].park === parkName) {
+            vm.showModal = vm.teams[i].park;
+            vm.parkPic = vm.teams[i].parkphoto;
+            vm.visit = {};
+            vm.visit.date = vm.teams[i].date;
+            vm.visit.rating = vm.teams[i].rating;
+            vm.visit.comments = vm.teams[i].comments;
+          }
+        }
+      }
+
       vm.hideModal = function() {
         vm.showModal = false;
         vm.visit = {};
       }
 
       vm.markAsVisited = function(parkName) {
-        debugger
         var parkLocation = ref.child('users').child(vm.user).child('visited_parks').child(parkName);
         parkLocation.set(vm.visit);
         for(var i=0; i<vm.teams.length; i++) {
