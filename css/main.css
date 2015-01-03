@@ -132,9 +132,33 @@ p {
   text-align: center
 }
 
-.ticket-sidebar span {
+.ticket-sidebar .avg-rating {
   display: block;
   text-align: center;
+}
+
+.ticket-sidebar .btn {
+  display: block;
+  margin: 10px auto;
+}
+
+.comments-wrap {
+  height: 400px;
+  overflow-y: scroll;
+  word-break: break-word;
+}
+
+.user-comments {
+  margin: 10px 0;
+  list-style: none;
+}
+
+.comment-rating {
+  color: rgb(224, 204, 96);
+}
+
+.comment-date {
+  color: #758451;
 }
 
 .ticket-results-wrap, .ticket-sidebar {

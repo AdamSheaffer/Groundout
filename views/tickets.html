@@ -2,7 +2,18 @@
   <img class="col-sm-4 img-circle park-pic" ng-src="{{ticket.parkPic}}" alt="Ballpark picture">
   <h2 class="col-sm-8 park-name">{{ticket.parkName}}</h2>
   <h4>Avg User Rating:</h4>
-  <span>{{ticket.avgRating}} out of 5</span>
+  <span class="avg-rating">{{ticket.avgRating}} out of 5</span>
+  <button class="list-comments-btn btn btn-primary" ng-show="!ticket.comments" ng-click="ticket.showComments()">View Comments</button>
+  <button class="hide-comments-btn btn btn-primary" ng-show="ticket.comments" ng-click="ticket.hideComments()">Hide Comments</button>
+  <div class="comments-wrap" ng-show="ticket.comments">
+  <ul>
+    <li class="user-comments" ng-repeat="comment in ticket.commentsList">
+      <span class="comment-date">{{comment.date}}</span>
+      <span class="comment-rating">{{comment.rating}}</span>
+      <p>{{comment.comments}}</p>
+    </li>
+  </ul>
+  </div>
 </div>
 <div class="col-md-9 col-md-pull-3 ticket-results-wrap">
   <table class="table table-striped">

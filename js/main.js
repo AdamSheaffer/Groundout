@@ -562,7 +562,6 @@
       }
 
       vm.listComments = function() {
-
         ref.child("users").on("value", function(snapshot) {
           snapshot.forEach(function(childSnapshot){
             var hasComment = !!(childSnapshot.val().visited_parks[vm.titleCaseParkName]);
@@ -572,6 +571,16 @@
             }
           })
         })
+      }
+
+      vm.comments = false;
+
+      vm.hideComments = function() {
+        vm.comments = false
+      }
+
+      vm.showComments = function() {
+        vm.comments = true;
       }
 
       vm.findAverageRating();
