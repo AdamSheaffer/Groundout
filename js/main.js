@@ -439,6 +439,7 @@
       $http.get(FirebaseURL + 'users/' + vm.user + '/visited_parks.json')
         .success(function(data){
           for(var i=0; i<vm.teams.length; i++) {
+            debugger
             var team = vm.teams[i];
             if(!!data[team.park]) {
               team.visited = true;

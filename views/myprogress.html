@@ -17,6 +17,7 @@
     <form role="form" name="newVisitForm">
       <div class="form-group">
         <label>Date</label>
+        <span class="glyphicon glyphicon-calendar"></span>
         <input class="form-control" type="text" ng-model="myProg.visit.date" bs-datepicker data-date-type="string" required>
       </div>
       <div class="form-group">
@@ -31,6 +32,7 @@
       </div>
       <div class="form-group">
         <label>Comments</label>
+        <span class="glyphicon glyphicon-comment"></span>
         <textarea cols="40" rows="5" ng-model="myProg.visit.comments" placeholder="Awesome hotdogs!"></textarea>
       </div>
       <button class="btn btn-warning" ng-click="myProg.hideModal()">Cancel</button>
@@ -43,11 +45,18 @@
     <a href="{{team.ticketpath}}">
       <img class="teams" ng-class="{'unvisited': !team.visited}" ng-src="{{team.image}}" alt="{{team.name}}">
     </a>
+    <a href="{{team.ticketpath}}">
+      <h4 class="progress-team-name">{{team.name}}</h4>
+    </a>
     </div>
     <div class="trip-details" ng-hide="!team.visited">
       <div><h5>Date:</h5>{{team.date}}</div>
       <div><h5>Rating:</h5><span class="stars">{{team.rating}}</span></div>
       <div><h5>Comments:</h5>{{team.comments}}</div>
+      <button class="btn btn-primary btn-xs">
+        <span class="glyphicon glyphicon-edit"></span>
+        <span>Edit</span>
+      </button>
     </div>
     <button ng-hide="team.visited" class="btn btn-warning" ng-click="myProg.askForDetails(team.park)">Mark As Visited</button>
   </div>
