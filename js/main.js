@@ -502,6 +502,7 @@
       vm.venue = $routeParams.id;
       vm.teams = teamsFactory.teams;
       vm.titleCaseParkName = vm.venue.replace(/\b./g, function(m){ return m.toUpperCase(); }); //this is to get park name as title case
+      vm.avgRating;
       var url = 'http://api.seatgeek.com/2/events?per_page=83&type=mlb&venue.name=' + vm.venue;
 
 
@@ -527,7 +528,7 @@
         });
       }
 
-      vm.averageUserRating = function() {
+      vm.findAverageRating = function() {
         var numOfUsers = 0;
         var sumOfRatings = 0;
 
@@ -541,12 +542,12 @@
               sumOfRatings += stars;
             }
           })
-          return sumOfRatings / numOfUsers;
+          vm.avgRating = sumOfRatings / numOfUsers;
+          $scope.$apply();
         });
-
       }
 
-      vm.averageUserRating();
+      vm.findAverageRating();
 
       vm.findTickets();
 
