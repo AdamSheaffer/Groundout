@@ -198,10 +198,10 @@
       },
       {
         name: 'White Sox',
-        park: 'U.S. Cellular Field',
+        park: 'US Cellular Field',
         image: '../images/teamlogos/whitesox.png',
         parkphoto: '../images/parkphotos/US Cellular Field.jpg',
-        ticketpath: '/#/tickets/U.S. cellular field',
+        ticketpath: '/#/tickets/US cellular field',
         visited: false
       },
       {
@@ -222,10 +222,10 @@
       },
       {
         name: 'Athletics',
-        park: 'O.co Coliseum',
+        park: 'O co Coliseum',
         image: '../images/teamlogos/athletics.png',
         parkphoto: '../images/parkphotos/O.co Coliseum.jpg',
-        ticketpath: '/#/tickets/O.co Coliseum',
+        ticketpath: '/#/tickets/O co Coliseum',
         visited: false
       },
       {
@@ -492,6 +492,7 @@
       }
 
       vm.markAsVisited = function(parkName) {
+        debugger
         var parkLocation = ref.child('users').child(vm.user).child('visited_parks').child(parkName);
         parkLocation.set(vm.visit);
         for(var i=0; i<vm.teams.length; i++) {
