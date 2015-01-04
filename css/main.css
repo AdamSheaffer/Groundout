@@ -72,7 +72,7 @@ body {
 }
 
 .login-container {
-  margin: 80px 25%;
+  margin: 80px 25% 0 25%;
 }
 
 .row{
@@ -239,36 +239,23 @@ dir-pagination-controls {
   background-color: #758451;
 }
 
-.prog-lightbox {
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  background: #000;
-  opacity: .7;
-  top: 0;
-  left: 0;
-}
-
-.prog-modal {
-  top: 5%;
-  left: 35%;
-  position: fixed;
-  width: 30%;
-  min-width: 300px;
-  box-shadow: #343434 5px 5px 15px;
-  padding: 20px;
-  box-sizing: border-box;
-  border-radius: 2px;
-  background-color: #f8f8f8;
-  border: solid 5px #758451;
-  z-index: 20;
-}
-
 .modal-pic {
   height: 80px;
   width: 80px;
   border-radius: 50%;
   border: 1px solid #758451;
+  display: inline-block;
+  margin: 5px auto;
+}
+
+#myModalLabel {
+  text-align: center;
+  color: #758451;
+  display: inline-block;
+}
+
+textarea, select {
+  display: block;
 }
 
 .glyphicon{

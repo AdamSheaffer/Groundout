@@ -463,21 +463,20 @@
         return Math.round(totalVisited / totalTeams * 100) + '%';
       };
 
-      vm.showModal = false;
-
       vm.askForDetails = function(parkName) {
         for(var i=0; i<vm.teams.length; i++) {
           if(vm.teams[i].park === parkName) {
-            vm.showModal = vm.teams[i].park;
+            vm.park = vm.teams[i].park;
             vm.parkPic = vm.teams[i].parkphoto;
           }
         }
       }
 
       vm.editTrip = function(parkName){
+        $('#myModal').modal('toggle');
         for(var i=0; i<vm.teams.length; i++) {
           if(vm.teams[i].park === parkName) {
-            vm.showModal = vm.teams[i].park;
+            vm.park = vm.teams[i].park;
             vm.parkPic = vm.teams[i].parkphoto;
             vm.visit = {};
             vm.visit.date = vm.teams[i].date;
@@ -488,7 +487,6 @@
       }
 
       vm.hideModal = function() {
-        vm.showModal = false;
         vm.visit = {};
       }
 
@@ -503,7 +501,8 @@
             vm.teams[i].comments = vm.visit.comments;
           }
         }
-        vm.hideModal();
+        vm.visit = {};
+        $('#myModal').modal('toggle');
       }
 
     })

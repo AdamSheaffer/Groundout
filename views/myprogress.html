@@ -9,37 +9,6 @@
 </div>
 
 <div class="progress-wrapper">
-  <div class="prog-lightbox" ng-show="myProg.showModal" ng-click="myProg.hideModal()"></div>
-
-  <div class="prog-modal" ng-show="myProg.showModal">
-    <img class="modal-pic" ng-src="{{myProg.parkPic}}">
-    <h2>How was your trip to {{myProg.showModal}}?</h2>
-    <form role="form" name="newVisitForm">
-      <div class="form-group">
-        <label>Date</label>
-        <span class="glyphicon glyphicon-calendar"></span>
-        <input class="form-control" type="text" ng-model="myProg.visit.date" bs-datepicker data-date-type="string" required>
-      </div>
-      <div class="form-group">
-        <label>Rating</label>
-        <select ng-model="myProg.visit.rating">
-          <option value="&#9733;">&#9733;</option>
-          <option value="&#9733; &#9733;">&#9733; &#9733;</option>
-          <option value="&#9733; &#9733; &#9733;">&#9733; &#9733; &#9733;</option>
-          <option value="&#9733; &#9733; &#9733; &#9733;">&#9733; &#9733; &#9733; &#9733;</option>
-          <option value="&#9733; &#9733; &#9733; &#9733; &#9733;">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Comments</label>
-        <span class="glyphicon glyphicon-comment"></span>
-        <textarea cols="40" rows="5" ng-model="myProg.visit.comments" placeholder="Awesome hotdogs!"></textarea>
-      </div>
-      <button class="btn btn-warning" ng-click="myProg.hideModal()">Cancel</button>
-      <button class="btn btn-warning" ng-click="myProg.markAsVisited(myProg.showModal)">Log Trip</button>
-    </form>
-  </div>
-
   <div class="my-visits-wrap col-lg-2" ng-repeat="team in myProg.teams">
     <div>
     <a href="{{team.ticketpath}}">
@@ -58,6 +27,49 @@
         <span>Edit</span>
       </button>
     </div>
-    <button ng-hide="team.visited" class="btn btn-warning" ng-click="myProg.askForDetails(team.park)">Mark As Visited</button>
+    <button ng-hide="team.visited" type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal" ng-click="myProg.askForDetails(team.park)">
+      Mark As Visited
+    </button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <img class="modal-pic" ng-src="{{myProg.parkPic}}">
+        <h4 class="modal-title" id="myModalLabel">How was your trip to {{myProg.park}}?</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form" name="newVisitForm">
+          <div class="form-group">
+            <label>Date</label>
+            <span class="glyphicon glyphicon-calendar"></span>
+            <input class="form-control" type="text" ng-model="myProg.visit.date" bs-datepicker data-date-type="string" required>
+          </div>
+          <div class="form-group">
+            <label>Rating</label>
+            <select ng-model="myProg.visit.rating">
+              <option value="&#9733;">&#9733;</option>
+              <option value="&#9733; &#9733;">&#9733; &#9733;</option>
+              <option value="&#9733; &#9733; &#9733;">&#9733; &#9733; &#9733;</option>
+              <option value="&#9733; &#9733; &#9733; &#9733;">&#9733; &#9733; &#9733; &#9733;</option>
+              <option value="&#9733; &#9733; &#9733; &#9733; &#9733;">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Comments</label>
+            <span class="glyphicon glyphicon-comment"></span>
+            <textarea cols="40" rows="5" ng-model="myProg.visit.comments" placeholder="Awesome hotdogs!"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="myProg.hideModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="myProg.markAsVisited(myProg.park)">Log Trip</button>
+      </div>
+    </div>
   </div>
 </div>
