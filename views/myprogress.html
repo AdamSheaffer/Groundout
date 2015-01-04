@@ -68,7 +68,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="myProg.hideModal()">Cancel</button>
-        <button type="button" class="btn btn-primary" ng-click="myProg.markAsVisited(myProg.park)">Log Trip</button>
+        <button ng-disabled="!(myProg.visit.date && myProg.visit.rating)" type="button" class="btn btn-primary" ng-click="myProg.markAsVisited(myProg.park)">Log Trip</button>
       </div>
     </div>
   </div>

@@ -2,10 +2,15 @@ body {
   background-image: url('../images/satinweave.png');
 }
 
+h1, h2, h3, h4, h5, .navbar {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+}
+
 .jumbotron {
   min-height: 400px;
   text-align: center;
-  background: url('../images/baseball3.jpg') no-repeat center fixed;
+  background: url('../images/baseball5.jpg') no-repeat center fixed;
   background-size: cover;
   margin-bottom: 0;
   margin-top: 50px;
@@ -61,6 +66,10 @@ body {
 .tagline, #brand {
   color: #f0ad4e;
   text-shadow: 1px 1px 5px #050404
+}
+
+h2 .glyphicon {
+  padding-right: 8px;
 }
 
 .change-pw-container {

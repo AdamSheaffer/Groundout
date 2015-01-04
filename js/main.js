@@ -158,7 +158,7 @@
       },
       {
         name: 'Rays',
-        park: 'Chase Field',
+        park: 'Tropicana Field',
         image: '../images/teamlogos/rays.png',
         parkphoto: '../images/parkphotos/Tropicana Field.jpg',
         ticketpath: '/#/tickets/tropicana field',
@@ -304,6 +304,7 @@
               console.log("Authenticated successfully with payload:", authData);
               $rootScope.user = authData;
               ref.child('users').child(authData.uid).child('authData').set(authData);
+              ref.child('users').child(authData.uid).child('visited_parks').child('new-user').set('true');
               cb();
           }
         });
@@ -377,31 +378,31 @@
         templateUrl: 'views/myprogress.html',
         controller: 'myProgController',
         controllerAs: 'myProg',
-        title: 'My Progress',
+        title: 'MY PROGRESS',
       })
       .when('/teams', {
         templateUrl: 'views/teams.html',
         controller: 'teamsController',
         controllerAs: 'teams',
-        title: 'Teams'
+        title: 'TEAMS'
       })
       .when('/tickets/:id', {
         templateUrl: 'views/tickets.html',
         controller: 'ticketController',
         controllerAs: 'ticket',
-        title: 'Tickets'
+        title: 'TICKETS'
       })
       .when('/changepassword', {
         templateUrl: 'views/changepassword.html',
         controller: 'loginController',
         controllerAs: 'login',
-        title: 'Change Password'
+        title: 'CHANGE PASSWORD'
       })
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'loginController',
         controllerAs: 'login',
-        title: 'Login',
+        title: 'LOGIN',
         resolve: {
           data: function(authFactory) {
             authFactory.preventMultiLogin();
@@ -546,6 +547,7 @@
 
         ref.child("users").on("value", function(snapshot) {
           snapshot.forEach(function(childSnapshot){
+            debugger
             var hasRating = !!(childSnapshot.val().visited_parks[vm.titleCaseParkName]);
             if(hasRating) {
               var rating = childSnapshot.val().visited_parks[vm.titleCaseParkName].rating;
@@ -553,7 +555,7 @@
               var stars = rating.replace(/\s/g, '').length; //getting rid of spaces
               sumOfRatings += stars;
             }
-          })
+          });
           var average = sumOfRatings / numOfUsers
           vm.avgRating = Math.round(average * 100) / 100;
           $scope.$apply();
