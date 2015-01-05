@@ -81,7 +81,7 @@
         park: 'Great American Ball Park',
         image: '../images/teamlogos/reds.png',
         parkphoto: '../images/parkphotos/Great American Ballpark.jpg',
-        ticketpath: '/#/tickets/great-american-ball-park',
+        ticketpath: '/#/tickets/great american ball park',
         visited: false
       },
       {
@@ -137,7 +137,7 @@
         park: 'Oriole Park at Camden Yards',
         image: '../images/teamlogos/orioles.png',
         parkphoto: '../images/parkphotos/Camden Yards.jpg',
-        ticketpath: '/#/tickets/oriole park',
+        ticketpath: '/#/tickets/oriole park at camden yards',
         visited: false
       },
       {
@@ -222,7 +222,7 @@
       },
       {
         name: 'Athletics',
-        park: 'O co Coliseum',
+        park: 'O.co Coliseum',
         image: '../images/teamlogos/athletics.png',
         parkphoto: '../images/parkphotos/O.co Coliseum.jpg',
         ticketpath: '/#/tickets/O co Coliseum',
@@ -514,7 +514,20 @@
       var ref = new Firebase(FirebaseURL);
       vm.venue = $routeParams.id;
       vm.teams = teamsFactory.teams;
-      vm.titleCaseParkName = vm.venue.replace(/\b./g, function(m){ return m.toUpperCase(); }); //this is to get park name as title case
+
+      vm.titleCaseParkName = function() { //this is to get park name as title case, and take care of a couple edge cases with names
+        if (vm.venue === "at-t-park") {
+          return "AT&T Park"
+        } else if (vm.venue === "oriole park at camden yards") {
+            return "Oriole Park at Camden Yards"
+        } else if (vm.venue === "O co Coliseum") {
+            return vm.venue;
+        }
+        else {
+          return vm.venue.replace(/\b./g, function(m){ return m.toUpperCase(); });
+        }
+      }
+
       vm.avgRating;
       vm.commentsList = [];
       var url = 'http://api.seatgeek.com/2/events?per_page=83&type=mlb&venue.name=' + vm.venue;
@@ -549,9 +562,9 @@
         ref.child("users").on("value", function(snapshot) {
           snapshot.forEach(function(childSnapshot){
             debugger
-            var hasRating = !!(childSnapshot.val().visited_parks[vm.titleCaseParkName]);
+            var hasRating = !!(childSnapshot.val().visited_parks[vm.titleCaseParkName()]);
             if(hasRating) {
-              var rating = childSnapshot.val().visited_parks[vm.titleCaseParkName].rating;
+              var rating = childSnapshot.val().visited_parks[vm.titleCaseParkName()].rating;
               numOfUsers ++;
               var stars = rating.replace(/\s/g, '').length; //getting rid of spaces
               sumOfRatings += stars;
@@ -566,9 +579,9 @@
       vm.listComments = function() {
         ref.child("users").on("value", function(snapshot) {
           snapshot.forEach(function(childSnapshot){
-            var hasComment = !!(childSnapshot.val().visited_parks[vm.titleCaseParkName]);
+            var hasComment = !!(childSnapshot.val().visited_parks[vm.titleCaseParkName()]);
             if(hasComment) {
-              var trip = childSnapshot.val().visited_parks[vm.titleCaseParkName];
+              var trip = childSnapshot.val().visited_parks[vm.titleCaseParkName()];
               vm.commentsList.push(trip);
             }
           })
