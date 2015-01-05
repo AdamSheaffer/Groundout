@@ -222,7 +222,7 @@
       },
       {
         name: 'Athletics',
-        park: 'O.co Coliseum',
+        park: 'O co Coliseum',
         image: '../images/teamlogos/athletics.png',
         parkphoto: '../images/parkphotos/O.co Coliseum.jpg',
         ticketpath: '/#/tickets/O co Coliseum',
@@ -465,6 +465,7 @@
       };
 
       vm.askForDetails = function(parkName) {
+        debugger
         for(var i=0; i<vm.teams.length; i++) {
           if(vm.teams[i].park === parkName) {
             vm.park = vm.teams[i].park;
@@ -492,7 +493,6 @@
       }
 
       vm.markAsVisited = function(parkName) {
-        debugger
         var parkLocation = ref.child('users').child(vm.user).child('visited_parks').child(parkName);
         parkLocation.set(vm.visit);
         for(var i=0; i<vm.teams.length; i++) {
@@ -542,6 +542,9 @@
             vm.schedule = data.events;
             vm.parkName = data.events[0].venue.name;
             vm.matchup = data.events[0].title;
+            if(vm.parkName === 'O.co Coliseum') { //for edge case of O co Coliseum name
+              vm.parkName = 'O co Coliseum';
+            }
             for(var i=0; i<vm.teams.length; i++) {
               if(vm.teams[i].park === vm.parkName) {
                 vm.parkPic = vm.teams[i].parkphoto;
@@ -561,7 +564,6 @@
 
         ref.child("users").on("value", function(snapshot) {
           snapshot.forEach(function(childSnapshot){
-            debugger
             var hasRating = !!(childSnapshot.val().visited_parks[vm.titleCaseParkName()]);
             if(hasRating) {
               var rating = childSnapshot.val().visited_parks[vm.titleCaseParkName()].rating;
