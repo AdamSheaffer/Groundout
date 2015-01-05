@@ -289,13 +289,13 @@
           if (error) {
             switch (error.code) {
               case "INVALID_EMAIL":
-                console.log("The specified user account email is invalid.");
+                $('.invalid-email-alert').show('drop');
                 break;
               case "INVALID_PASSWORD":
-                console.log("The specified user account password is incorrect.");
+                $('.wrong-password-alert').show('drop');
                 break;
               case "INVALID_USER":
-                console.log("The specified user account does not exist.");
+                $('.invalid-user-alert').show('drop');
                 break;
               default:
                 console.log("Error logging user in:", error);
@@ -318,16 +318,15 @@
           if (error) {
             switch (error.code) {
               case "EMAIL_TAKEN":
-                console.log("The new user account cannot be created because the email is already in use.");
+                $('.email-taken-alert').show('drop');
                 break;
               case "INVALID_EMAIL":
-                console.log("The specified email is not a valid email.");
+                $('.invalid-email-alert').show('drop');
                 break;
               default:
                 console.log("Error creating user:", error);
             }
           } else {
-              console.log("User account created successfully!");
               cb();
           }
         });
@@ -339,9 +338,8 @@
         }, function(error) {
           if (error === null) {
             cb();
-            console.log("Password reset email sent successfully");
           } else {
-            console.log("Error sending password reset email:", error);
+            $('.reset-fail-alert').show('drop');
           }
         });
       }
@@ -356,7 +354,7 @@
             console.log('Password changed successfully');
             cb();
           } else {
-            console.log('Error changing password:', error);
+            $('.reset-fail-alert').show('drop');
           }
           }
         );
@@ -666,6 +664,10 @@
           $location.path('/');
           $scope.$apply();
         });
+      }
+
+      vm.closeAlert = function() {
+        $('.alert').hide('drop');
       }
 
     })

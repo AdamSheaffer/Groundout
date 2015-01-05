@@ -40,4 +40,30 @@
       </div>
     </div>
   </div>
+
+  <div class="alert alert-warning email-taken-alert">
+    <button type="button" class="close" ng-click="login.closeAlert()">&times;</button>
+    <strong>Woops!</strong> That email is already in use.
+  </div>
+
+  <div class="alert alert-warning invalid-email-alert">
+    <button type="button" class="close" ng-click="login.closeAlert()">&times;</button>
+    <strong>Woops!</strong> That is not a valid email address.
+  </div>
+
+  <div class="alert alert-warning wrong-password-alert">
+    <button type="button" class="close" ng-click="login.closeAlert()">&times;</button>
+    <strong>Woops!</strong> Invalid email or password.
+  </div>
+
+  <div class="alert alert-warning invalid-user-alert">
+    <button type="button" class="close" ng-click="login.closeAlert()">&times;</button>
+    <strong>Woops!</strong> That email is not registered.
+  </div>
+
+  <div class="alert alert-warning reset-fail-alert">
+    <button type="button" class="close" ng-click="login.closeAlert()">&times;</button>
+    <strong>Woops!</strong> Unable to retrieve password. Please check to see that your email address is correct.
+  </div>
+
 </div>

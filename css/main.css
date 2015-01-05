@@ -2,7 +2,7 @@ body {
   background-image: url('../images/satinweave.png');
 }
 
-h1, h2, h3, h4, h5, .navbar {
+h1, h2, h3, h4, h5, .navbar, label {
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: 700;
 }
@@ -40,6 +40,11 @@ h1, h2, h3, h4, h5, .navbar {
   box-shadow: 2px 2px 10px #bbb;
 }
 
+.alert-warning {
+  display: none;
+  margin: 20px;
+}
+
 #forgot-password {
   font-size: .8em;
   cursor: pointer;
@@ -75,6 +80,7 @@ h2 .glyphicon {
 
 .change-pw-container {
   padding: 0 20px 40px 20px;
+  margin: 40px auto;
 }
 
 .content {
