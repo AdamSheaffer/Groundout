@@ -2,7 +2,7 @@
   <img class="col-sm-4 img-circle park-pic" ng-src="{{ticket.parkPic}}" alt="Ballpark picture">
   <h2 class="col-sm-8 park-name">{{ticket.parkName}}</h2>
   <h4>Avg User Rating:</h4>
-  <span class="avg-rating">{{ticket.avgRating}} out of 5</span>
+  <h5 class="avg-rating">{{ticket.avgRating}} out of 5</h5>
   <button class="list-comments-btn btn btn-primary" ng-show="!ticket.comments" ng-click="ticket.showComments()">View Comments</button>
   <button class="hide-comments-btn btn btn-primary" ng-show="ticket.comments" ng-click="ticket.hideComments()">Hide Comments</button>
   <div class="comments-wrap" ng-show="ticket.comments">
@@ -19,7 +19,7 @@
   <table class="table table-striped">
     <tr dir-paginate="event in ticket.schedule | itemsPerPage: 10">
       <td class="game-date">
-        {{event.datetime_local | date: 'MMM d'}}
+        <h4>{{event.datetime_local | date: 'MMM d'}}<h4>
       </td>
       <td>
         <h4>{{event.title}}</h4>

@@ -463,7 +463,6 @@
       };
 
       vm.askForDetails = function(parkName) {
-        debugger
         for(var i=0; i<vm.teams.length; i++) {
           if(vm.teams[i].park === parkName) {
             vm.park = vm.teams[i].park;
@@ -507,7 +506,7 @@
 
     })
 
-    .controller('ticketController', function(FirebaseURL, $routeParams, $scope, teamsFactory, authFactory){
+    .controller('ticketController', function(FirebaseURL, $routeParams, $scope, teamsFactory, authFactory, $rootScope){
       var vm = this;
       var ref = new Firebase(FirebaseURL);
       vm.venue = $routeParams.id;
@@ -572,7 +571,10 @@
           });
           var average = sumOfRatings / numOfUsers
           vm.avgRating = Math.round(average * 100) / 100;
-          $scope.$apply();
+          if (!$rootScope.hasOwnProperty('hasRunApply')) {
+            $scope.$apply();
+            $rootScope.hasRunApply = true;
+          }
         });
       }
 
