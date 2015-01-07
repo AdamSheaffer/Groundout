@@ -7,6 +7,20 @@ h1, h2, h3, h4, h5, .navbar, label {
   font-weight: 700;
 }
 
+h2 {
+  color: #758451;
+}
+
+h5 {
+  margin: 5px 0;
+}
+
+p {
+  line-height: 1.8em;
+}
+
+/******* Index *******/
+
 .jumbotron {
   min-height: 400px;
   text-align: center;
@@ -26,6 +40,36 @@ h1, h2, h3, h4, h5, .navbar, label {
 
 .navbar-inverse .navbar-nav>li>a {
   color: #f0ad4e;
+}
+
+.navbar-inverse {
+  background-color: #050404;
+  z-index: 10;
+}
+
+#title, .page-title {
+  color: #eee;
+  text-shadow: 1px 1px 5px #050404;
+}
+
+.page-title {
+  margin-top: 40px;
+}
+
+.tagline, #brand {
+  color: #f0ad4e;
+  text-shadow: 1px 1px 5px #050404;
+  font-weight: 700;
+}
+
+.content {
+  margin-bottom: 100px;
+}
+
+/******* Splash Page *******/
+
+.about-main {
+  padding: 0 20px 40px 20px;
 }
 
 .widget-wrap {
@@ -50,58 +94,30 @@ h1, h2, h3, h4, h5, .navbar, label {
   cursor: pointer;
 }
 
-.about-main {
-  padding: 0 20px 40px 20px;
-}
-
-.navbar-inverse {
-  background-color: #050404;
-  z-index: 10;
-}
-
-#title, .page-title {
-  color: #eee;
-  text-shadow: 1px 1px 5px #050404;
-}
-
-.page-title {
-  margin-top: 40px;
-}
-
-.tagline, #brand {
-  color: #f0ad4e;
-  text-shadow: 1px 1px 5px #050404;
-  font-weight: 700;
-}
-
 h2 .glyphicon {
   padding-right: 8px;
 }
 
-.change-pw-container {
-  padding: 0 20px 40px 20px;
-  margin: 40px auto;
-}
-
-.content {
-  margin-bottom: 100px;
-}
-
-.login-container {
-  margin: 80px 25% 140px 25%;
+.glyphicon{
+  color: lightgray;
 }
 
 .row{
   margin: 0 16.6666%;
 }
 
-h2 {
-  color: #758451;
+/******** Login / Logout pages *********/
+
+.change-pw-container {
+  padding: 0 20px 40px 20px;
+  margin: 40px auto;
 }
 
-p {
-  line-height: 1.8em;
+.login-container {
+  margin: 80px 25% 140px 25%;
 }
+
+/******** Teams Page *********/
 
 .league-wrap {
   padding-top: 30px;
@@ -127,6 +143,8 @@ p {
 .division-wrap ul a {
   display: block;
 }
+
+/********** Tickets Page **********/
 
 .park-pic {
   height:150px;
@@ -208,7 +226,63 @@ dir-pagination-controls {
   text-align: center;
 }
 
-/******* My Progress *******/
+/********* My Progress **********/
+
+.trophy-wrap {
+  width: 220px;
+  margin: 0 auto
+}
+
+.trophy {
+  display: inline-block;
+  background: linear-gradient(45deg, #BAD3FA, #4C5F73);
+  border-radius: 50%;
+  border: 3px solid #F0AD4E;
+  padding: 5px;
+  width: 60px;
+  height: 60px;
+  margin-top: 10px;
+  position: relative;
+}
+
+.trophy:nth-child(2) {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.trophy img {
+  height: 40px;
+  display: block;
+  margin: auto;
+}
+
+.trophy h3 {
+  position: absolute;
+  left: 15px;
+  top: 5px;
+}
+
+.unachieved {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  transition: filter 500ms ease;
+  -webkit-transition: -webkit-filter 350ms ease;
+}
+
+.prog-welcome {
+  text-align: center;
+}
+
+.progress {
+  margin: 45px auto;
+  height: 25px;
+  width: 40%;
+  border: 1px solid #758451;
+}
+
+.progress-bar {
+  background-color: #758451;
+}
 
 .teams {
   display: block;
@@ -248,39 +322,6 @@ dir-pagination-controls {
   margin: 0 auto;
 }
 
-.progress {
-  margin: 45px auto;
-  height: 25px;
-  width: 40%;
-  border: 1px solid #758451;
-}
-
-.progress-bar {
-  background-color: #758451;
-}
-
-.modal-pic {
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  border: 1px solid #758451;
-  display: inline-block;
-  margin-right: 5px;
-}
-
-#myModalLabel {
-  color: #758451;
-  display: inline-block;
-}
-
-textarea, select {
-  display: block;
-}
-
-.glyphicon{
-  color: lightgray;
-}
-
 .stars {
   color: rgb(224, 204, 96);
   font-size: 1.25em;
@@ -303,14 +344,24 @@ textarea, select {
   margin-top: 10px;
 }
 
-h5 {
-  margin: 5px 0;
-}
-
 .my-visits-wrap .btn {
   margin-top: 30px;
 }
 
-.prog-welcome {
-  text-align: center;
+.modal-pic {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: 1px solid #758451;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+#myModalLabel {
+  color: #758451;
+  display: inline-block;
+}
+
+textarea, select {
+  display: block;
 }

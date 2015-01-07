@@ -17,7 +17,7 @@
       })
       .when('/teams', {
         templateUrl: 'views/teams.html',
-        controller: 'teamsController',
+        controller: 'loginController',
         controllerAs: 'teams',
         title: 'TEAMS'
       })

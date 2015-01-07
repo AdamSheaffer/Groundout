@@ -2,6 +2,7 @@
   "use strict";
 
   angular.module('myApp')
+  
   .factory('teamsFactory', function(FirebaseURL){
     var factory = {},
     ref = new Firebase(FirebaseURL);
